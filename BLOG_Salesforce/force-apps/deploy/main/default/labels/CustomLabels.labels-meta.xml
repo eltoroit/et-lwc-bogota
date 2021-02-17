@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>THCM_Server_API</fullName>
+        <categories>https://localhost:3003 | https://thcm-stage-api.herokuapp.com | https://thcm-api.herokuapp.com</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>THC Server (API)</shortDescription>
+        <value>https://localhost:3003</value>
+    </labels>
+    <labels>
+        <fullName>THCM_Server_LWC</fullName>
+        <categories>http://localhost:3001 | https://thcm-stage.herokuapp.com | https://thcm.herokuapp.com</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>THC Server (LWC)</shortDescription>
+        <value>http://localhost:3001</value>
+    </labels>
+</CustomLabels>

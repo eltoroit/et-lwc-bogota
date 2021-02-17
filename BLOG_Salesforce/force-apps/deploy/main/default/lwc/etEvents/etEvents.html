@@ -1,0 +1,30 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Create/Shide">
+            <lightning-card>
+                <lightning-button-group slot="actions">
+                    <lightning-button label={createLabel} onclick={onCreateClick}></lightning-button>
+                    <lightning-button label={showLabel} onclick={onShowClick}></lightning-button>
+                </lightning-button-group>
+                <template if:true={isCreated}>
+                    <div data-id="hidden">
+                        <c-et-events-child name="One"></c-et-events-child>
+                    </div>
+                </template>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="List">
+            <lightning-card>
+                <lightning-button-group slot="actions">
+                    <lightning-button label="Add" onclick={onAddClick}></lightning-button>
+                    <lightning-button label="Remove" onclick={onRemoveClick}></lightning-button>
+                </lightning-button-group>
+                <template for:each={list} for:item="item">
+                    <div key={item}>
+                        <c-et-events-child name={item} has-child></c-et-events-child>
+                    </div>
+                </template>
+            </lightning-card>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

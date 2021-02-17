@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TEST</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/SLDS/styles/salesforce-lightning-design-system.min.css" />
+    <script src='main.js'></script>
+    <style>
+        .page {
+            width: 100%;
+        }
+
+        .frame {
+            height: 100%;
+            overflow-y: hidden;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body style="height:100%">
+    <div class="slds-grid page" style="height:100%">
+        <div class="slds-col frame">
+            <iframe src="/" scrolling="no" width="100%" height="100%" style="padding-inline:5px"></iframe>
+        </div>
+        <div class="slds-col frame">
+            <iframe src="/" scrolling="no" width="100%" height="100%" style="padding-inline:5px"></iframe>
+        </div>
+        <div class="slds-col frame">
+            <iframe src="/" scrolling="no" width="100%" height="100%" style="padding-inline:5px"></iframe>
+        </div>
+    </div>
+</body>
+
+<script>
+    // IOS address bar covers my page's header
+    // https://stackoverflow.com/questions/43575363/css-100vh-is-too-tall-on-mobile-due-to-browser-ui
+    function resetHeight() {
+        let height = `${window.innerHeight}px`
+        document.body.height = height;
+        document.body.style.height = height;
+    }
+
+    setTimeout(() => {
+        window.addEventListener("resize", resetHeight);
+        resetHeight();
+    }, 0)
+</script>
+
+</html>

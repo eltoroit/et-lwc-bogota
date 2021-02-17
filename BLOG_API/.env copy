@@ -1,0 +1,6 @@
+ET_DEBUG=YES
+DYNO=Localhost
+TESTING_ENVIRONMENT=YES
+SF_SERVER="https://test.salesforce.com"
+SF_USERNAME="secure.username@domain.com"
+SF_PASSWORD="SECURED_PASSWORD"

@@ -1,0 +1,26 @@
+{
+	"packageDirectories": [
+		{ "path": "force-apps/doFirst", "default": false },
+		{
+			"path": "force-apps/doNotDeploy",
+			"default": false
+		},
+		{
+			"path": "force-apps/deploy",
+			"default": true,
+			"package": "THCM",
+			"versionName": "V0.1-Stage",
+			"versionNumber": "0.1.0.NEXT"
+		}
+	],
+	"namespace": "",
+	"sfdcLoginUrl": "https://login.salesforce.com",
+	"sourceApiVersion": "50.0",
+	"packageAliases": {
+		"THCM": "0Ho1H000000blJxSAI",
+		"THCM@0.1.0-1": "04t1H000000KQrrQAG",
+		"THCM@0.1.0-3": "04t1H000000KQs1QAG",
+		"THCM@0.1.0-4": "04t1H000000KQs6QAG",
+		"THCM@0.1.0-5": "04t1H000000KQsBQAW"
+	}
+}

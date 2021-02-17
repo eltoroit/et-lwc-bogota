@@ -1,0 +1,21 @@
+{
+  "name": "thcm-api",
+  "version": "0.0.1",
+  "description": "Trailhead Calssroom Management Tool (API)",
+  "author": "Andres Perez @ELTOROIT",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "jsforce": "1.10.1"
+  },
+  "scripts": {
+    "serve": "node scripts/Server.js"
+  },
+  "engines": {
+    "node": "14.15.1",
+    "npm": "6.14.9"
+  }
+}

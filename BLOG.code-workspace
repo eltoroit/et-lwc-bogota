@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "./BLOG_Salesforce"
+		},
+		{
+			"path": "./BLOG_API"
+		},
+		{
+			"path": "./BLOG_LWC"
+		},
+		{
+			"path": "./BLOG_@ELTOROIT"
+		}
+	],
+	"settings": {
+		"salesforcedx-vscode-core.show-cli-success-msg": false
+	}
+}

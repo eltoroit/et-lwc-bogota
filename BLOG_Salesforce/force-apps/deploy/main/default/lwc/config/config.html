@@ -1,0 +1,30 @@
+<template>
+    <lightning-card>
+        <lightning-button-group slot="actions">
+            <lightning-button label="Hello" onclick={onHelloClick}></lightning-button>
+            <lightning-button label="Shuffle" variant="brand" onclick={onShuffleClick}></lightning-button>
+        </lightning-button-group>
+        <table class="slds-p-bottom_small">
+            <tr>
+                <th>In Org</th>
+                <td>{inOrg}</td>
+            </tr>
+            <tr>
+                <th>How many rows?</th>
+                <td>
+                    <lightning-input type="number" label="How Many?" variant="label-hidden" value={howMany}
+                        onchange={onHowManyChange} step="1" min="1">
+                    </lightning-input>
+                </td>
+            </tr>
+            <tr>
+                <th>Max Random value</th>
+                <td>
+                    <lightning-input type="number" label="Max Random" variant="label-hidden" value={maxRandom}
+                        onchange={onMaxRandomChange} step="1" min="5">
+                    </lightning-input>
+                </td>
+            </tr>
+        </table>
+    </lightning-card>
+</template>

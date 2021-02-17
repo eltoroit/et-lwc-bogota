@@ -1,0 +1,17 @@
+{
+    "orgSource": "soDEMO",
+    "orgDestination": "soDEMO",
+    "sObjectsData": [],
+    "sObjectsMetadata": [],
+    "rootFolder": "ETCopyData",
+    "includeAllCustom": true,
+    "customObjectsToIgnore": null,
+    "stopOnErrors": true,
+    "ignoreFields": null,
+    "copyToProduction": false,
+    "twoPassReferenceFields": null,
+    "maxRecordsEach": -1,
+    "deleteDestination": true,
+    "useBulkAPI": false,
+    "pollingTimeout": 100000
+}

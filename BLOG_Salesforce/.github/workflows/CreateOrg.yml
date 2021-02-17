@@ -1,0 +1,123 @@
+# Find the [Sfdx Auth Url] by running this command: `sfdx force:org:display --verbose --targetusername sb****`
+
+name: 'ELTOROIT Test Scratch Org'
+on: [push]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        env:
+            ET_CICD: true
+        steps:
+            #
+            # Setup the Vitual Machine
+            #
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '12'
+            - name: Create etLogs folder as needed
+              run: mkdir -p etLogs
+            - name: PWD
+              run: pwd
+              if: ${{ env.ET_CICD  }}
+            - name: Export token DEVHUB
+              run: echo ${{ secrets.DEVHUB_TOKEN}} > etLogs/tokenDEVHUB.txt
+            - name: Export token SANDBOX
+              run: echo ${{ secrets.SANDBOX_TOKEN}} > etLogs/tokenSANDBOX.txt
+
+            #
+            # Configure SFDX
+            #
+
+            - name: Install tools - SFDX via npm
+              run: npm install -g sfdx-cli
+            - name: Install tools - SFDX Version
+              run: sfdx -v
+            - name: Install tools - Install ETCopyData (SFDX Plugin)
+              run: echo 'y' | sfdx plugins:install etcopydata@beta
+            - name: Install tools - Install Jest unit testing tools for Lightning web components
+              run: sfdx force:lightning:lwc:test:setup
+            - name: Register DevHub
+              run: sfdx force:auth:sfdxurl:store -f etLogs/tokenDEVHUB.txt --setalias DevHub --setdefaultdevhubusername
+            - name: Register Sandbox
+              run: sfdx force:auth:sfdxurl:store -f etLogs/tokenSANDBOX.txt --setalias sbTHCM_CICD
+            - name: Show Orgs
+              run: sfdx force:org:list --all
+
+            #
+            # Create scratch org
+            #
+
+            - name: Run Jest
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainRunJest
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: JEST_TESTS
+                  path: etLogs/jestTests.json
+            # - name: Backup Alias (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainBackupAlias
+            - name: Create Scratch Org
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainCreateScratchOrg
+            # - name: Pause To Check (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainPauseToCheck
+            - name: Open Scratch Org
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainOpenDeployPage
+            - name: Manual Metadata Before (NOT NEEDED FOR CI/CD)
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainPrepareOrg
+            # - name: Manual Metadata Before (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainManualMetadataBefore
+            - name: Execute Apex Before Deployment
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainExecuteApexBeforePush
+            - name: Install Packages
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainInstallPackages
+            # - name: Deploy Metadata (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainDeploy
+            - name: Push Metadata
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainPushMetadata
+            - uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                  name: ERROR_DEPLOY
+                  path: etLogs/deploy.json
+            # - name: Manual Metadata After (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainManualMetadataAfter
+            - name: Execute Apex After Deployment
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainExecuteApexAfterPush
+            - name: Assign Permission Set
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainAssignPermissionSet
+            - name: Deploy Admin profile
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainDeployAdminProfile
+            - name: Load Data
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainLoadData
+            - name: Execute Apex After Data
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainExecuteApexAfterData
+            - name: Run Apex Tests
+              run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainRunApexTests
+            - uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                  name: ERROR_APEXT_TESTS
+                  path: etLogs/apexTests.json
+            # - name: Push Again (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainPushAgain
+            # - name: Reassign Alias (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainReassignAlias
+            # - name: Publish community (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainPublishCommunity
+            # - name: Generate Password (NOT NEEDED FOR CI/CD)
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainGeneratePassword
+            # Upload logs as artifacts
+
+            #
+            # Deploy to sandbox
+            #
+            # Not for this demo...
+            # - name: Deploy To Sandbox
+            #   run: ./@ELTOROIT/scripts/shell/CreateOrg.sh mainDeployToSandbox
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: logs
+                  path: |
+                      etLogs
+                      !etLogs/tokenDEVHUB.txt
+                      !etLogs/tokenSANDBOX.txt

@@ -1,0 +1,24 @@
+<template>
+    <table if:true={funnyName}>
+        <tr>
+            <th>Id</th>
+            <td>{funnyName.Id}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td style="background-color: darkcyan;"><b>{funnyName.Name}</b></td>
+        </tr>
+        <tr>
+            <th>Pronunciation__c</th>
+            <td>{funnyName.Pronunciation__c}</td>
+        </tr>
+        <tr>
+            <th>Points__c</th>
+            <td>{funnyName.Points__c}</td>
+        </tr>
+        <tr>
+            <th>Random__c</th>
+            <td>{funnyName.Random__c}</td>
+        </tr>
+    </table>
+</template>

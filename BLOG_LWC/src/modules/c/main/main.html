@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="LWC: On-Core &amp; Off-Core">
+        <lightning-button-group slot="actions">
+            <lightning-button if:true={showCustomerPageButton} label="Customer Page" onclick={onCustomerPageClick}
+                variant="brand"></lightning-button>
+        </lightning-button-group>
+        <div class="slds-p-horizontal_small">
+            <lightning-tabset active-tab-value="ACTIVE">
+                <lightning-tab label="Static Resources" value="ACTIVE">
+                    <c-resources></c-resources>
+                </lightning-tab>
+                <lightning-tab label="Data">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12">
+                            <div class="slds-p-bottom_small">
+                                <c-config onmanychange={onManyChange} onshuffle={onShuffle}></c-config>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                            <div class="slds-p-right_x-small">
+                                <c-multiple-records how-many={howMany} onrecordselected={onRecordSelected}>
+                                </c-multiple-records>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                            <div class="slds-p-left_x-small">
+                                <c-single-record record-id={recordId}></c-single-record>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-tab>
+                <lightning-tab label="Events">
+                    <c-et-events></c-et-events>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </lightning-card>
+</template>

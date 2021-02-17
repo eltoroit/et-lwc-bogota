@@ -1,0 +1,10 @@
+{
+	"extends": "@salesforce/eslint-config-lwc/recommended",
+	"rules": {
+		"no-debugger": "off",
+		"no-alert": "off",
+		"@lwc/lwc/no-async-await": "off",
+		"@lwc/lwc/no-api-reassignments": "off",
+		"@lwc/lwc/no-async-operation": "off"
+	}
+}
